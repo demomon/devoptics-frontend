@@ -25,7 +25,7 @@ pipeline {
 				// Tell Deliver that this job produced the image ...
 				gateProducesArtifact type: 'docker', id: "${IMAGE_ID}"
 				// Trigger deploy job (downstream consumer)
-				build job: 'devoptics/devoptics-release/master', imageId : "${IMAGE_ID}"
+				build job: 'devoptics/devoptics-release/master', parameters: [string(name: 'FRONTEND_IMAGE_ID', value: "${IMAGE_ID}")]
 			}
 		}
 	}
