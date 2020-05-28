@@ -2,24 +2,16 @@ pipeline {
 	agent any
 	environment {
 		IMAGE_NAME="caladreas/devoptics-frontend"
-		IMAGE_TAG=""
 	}
 	stages {
-		stage('Hello') {
-			steps {
-				println 'Hello World'
-			}
-		}
 		stage('Build') {
 			steps {
-				script {
-					IMAGE_TAG "${env.BUILD_ID}"
-				}
+				println 'building docker image, I swear...'
 			}
 		}
 		stage('Release') {
 			environment{
-				IMAGE_ID = "${IMAGE_NAME}:${IMAGE_TAG}"
+				IMAGE_ID = "${IMAGE_NAME}:${env.BUILD_ID}"
 			}
 			steps {
 				// Tell Deliver that this job produced the image ...
